@@ -79,6 +79,7 @@
     <ClInclude Include="Errors.h" />
     <ClInclude Include="GameEngine.h" />
     <ClInclude Include="GLSLProgram.h" />
+    <ClInclude Include="VertexData.h" />
     <ClInclude Include="Sprite.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

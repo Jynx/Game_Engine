@@ -14,6 +14,12 @@ GLSLProgram::~GLSLProgram() {}
 
 void GLSLProgram::CompileShaders(const std::string& vertexShaderFilePath,
                                  const std::string& fragmentShaderFilePath) {
+
+    // Vertex and fragment shaders are successfully compiled.
+    // Now time to link them together into a program.
+    // Get a program object.
+    _programID = glCreateProgram();
+
     _vertexShaderID = glCreateShader(GL_VERTEX_SHADER);
     if (!_vertexShaderID) {
         FatalError("Vertex Shader failed to load");
@@ -69,10 +75,6 @@ void GLSLProgram::CompileShader(const std::string& filePath, GLuint& shaderID) {
 }
 
 void GLSLProgram::LinkShaders() {
-    // Vertex and fragment shaders are successfully compiled.
-    // Now time to link them together into a program.
-    // Get a program object.
-    _programID = glCreateProgram();
 
     // Attach our shaders to our program
     glAttachShader(_programID, _vertexShaderID);
@@ -131,4 +133,14 @@ void GLSLProgram::UnBind() {
     for(int i = 0; i < _numAttributes; i++) {
         glDisableVertexAttribArray(i);
     }
+}
+
+GLuint GLSLProgram::GetUniformVarLocation(const std::string& name) {
+    //call to OpenGL to get uniform location
+    //1: program ID, 2: name return: an ID.
+    GLuint loc = glGetUniformLocation(_programID, name.c_str());
+    if(loc == GL_INVALID_INDEX) {
+        FatalError("Get Uniform Location failed with name: " + name);
+    }
+    return loc;
 }

@@ -14,6 +14,7 @@ public:
     void AddAttribute(const std::string& attributeName);
     void Bind();
     void UnBind();
+    GLuint GetUniformVarLocation(const std::string& name);
 private:
     int _numAttributes;
     GLuint _programID;

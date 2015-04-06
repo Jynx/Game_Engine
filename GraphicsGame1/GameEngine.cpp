@@ -1,21 +1,20 @@
 #include "GameEngine.h"
-
 #include <stdio.h>
 #include <iostream>
 #include <string>
 
-GameEngine::GameEngine() {
-    _window = nullptr;
-    _screenWidth = 1024;
-    _screenHeight = 768;
-    _gameState = GameState::PLAY;
-}
+GameEngine::GameEngine()
+    : _screenWidth(1024),
+      _screenHeight(768),
+      _window(nullptr),
+      _gameState(GameState::PLAY),
+      _time(0) {}
 
 GameEngine::~GameEngine() {}
 
 void GameEngine::Run() {
     InitSystems();
-    _testSprite.Init(-1, -1, 1, 1);
+    _testSprite.Init(-1.0f, -1.0f, 2.0f, 2.0f);
     GameLoop();
 }
 
@@ -52,12 +51,14 @@ void GameEngine::InitShaders() {
     _colorProg.CompileShaders("Shaders/colorShader.vert",
                               "Shaders/colorShader.frag");
     _colorProg.AddAttribute("vertexPosition");
+    _colorProg.AddAttribute("vertexColor");
     _colorProg.LinkShaders();
 }
 
 void GameEngine::GameLoop() {
     while (_gameState != GameState::EXIT) {
         ProcessInput();
+        _time += 0.0001;
         DrawGame();
     }
 }
@@ -164,11 +165,14 @@ void GameEngine::ProcessInput() {
 }
 
 void GameEngine::DrawGame() {
+
     glClearDepth(1.0);  // sets a var to tell opengl what depth to clear to.
     // clears the color/depth buffer.
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     _colorProg.Bind();
+	GLuint timeUniformLoc = _colorProg.GetUniformVarLocation("time");
+    glUniform1f(timeUniformLoc, _time);
 
     _testSprite.Draw();
 
