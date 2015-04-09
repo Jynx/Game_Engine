@@ -51,7 +51,7 @@
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;opengl32.lib;glew32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;opengl32.lib;glew32.lib;SOIL.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -72,6 +72,8 @@
     <ClCompile Include="Errors.cpp" />
     <ClCompile Include="GameEngine.cpp" />
     <ClCompile Include="GLSLProgram.cpp" />
+    <ClCompile Include="ImageLoader.cpp" />
+    <ClCompile Include="IOManager.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Sprite.cpp" />
   </ItemGroup>
@@ -79,6 +81,9 @@
     <ClInclude Include="Errors.h" />
     <ClInclude Include="GameEngine.h" />
     <ClInclude Include="GLSLProgram.h" />
+    <ClInclude Include="ImageLoader.h" />
+    <ClInclude Include="IOManager.h" />
+    <ClInclude Include="OpenGLTexture.h" />
     <ClInclude Include="VertexData.h" />
     <ClInclude Include="Sprite.h" />
   </ItemGroup>

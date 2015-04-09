@@ -1,6 +1,7 @@
 #include "Sprite.h"
 #include "VertexData.h"
 #include <cstddef>
+
 Sprite::Sprite() : _vboID(0) {}
 
 Sprite::~Sprite() {

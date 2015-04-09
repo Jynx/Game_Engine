@@ -135,10 +135,10 @@ void GLSLProgram::UnBind() {
     }
 }
 
-GLuint GLSLProgram::GetUniformVarLocation(const std::string& name) {
+GLint GLSLProgram::GetUniformVarLocation(const std::string& name) {
     //call to OpenGL to get uniform location
     //1: program ID, 2: name return: an ID.
-    GLuint loc = glGetUniformLocation(_programID, name.c_str());
+    GLint loc = glGetUniformLocation(_programID, name.c_str());
     if(loc == GL_INVALID_INDEX) {
         FatalError("Get Uniform Location failed with name: " + name);
     }

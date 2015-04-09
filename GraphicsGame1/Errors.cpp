@@ -3,7 +3,7 @@
 #include <SDL/SDL.h>
 #include <cstdlib>
 
-void FatalError(std::string errorString) {
+void FatalError(const std::string& errorString) {
     int tmp;
     std::cout << errorString << std::endl;
     std::cout << "Enter any key to quit" << std::endl;
