@@ -26,47 +26,29 @@ void Sprite::Init(float x, float y, float width, float height) {
 
     VertexData vertexData[6];
 
-    vertexData[0].position.x = x + width;
-    vertexData[0].position.y = y + height;
-    vertexData[0].color.r = 25;
-    vertexData[0].color.g = 50;
-    vertexData[0].color.b = 255;
-    vertexData[0].color.alpha = 255;
+    vertexData[0].SetPosition(x + width, y + height);
+    vertexData[0].SetColor(25, 50, 255, 255);
+    vertexData[0].SetUV(1.0f, 1.0f);
 
-    vertexData[1].position.x = x;
-    vertexData[1].position.y = y + height;
-    vertexData[1].color.r = 255;
-    vertexData[1].color.g = 0;
-    vertexData[1].color.b = 55;
-    vertexData[1].color.alpha = 255;
+    vertexData[1].SetPosition(x, y + height);
+    vertexData[1].SetColor(255, 0, 55, 255);
+    vertexData[1].SetUV(0.0f, 1.0f);
 
-    vertexData[2].position.x = x;
-    vertexData[2].position.y = y;
-    vertexData[2].color.r = 255;
-    vertexData[2].color.g = 100;
-    vertexData[2].color.b = 255;
-    vertexData[2].color.alpha = 255;
+    vertexData[2].SetPosition(x, y);
+    vertexData[2].SetColor(255, 100, 255, 255);
+    vertexData[2].SetUV(0.0f, 0.0f);
     // triangle deuce
-    vertexData[3].position.x = x;
-    vertexData[3].position.y = y;
-    vertexData[3].color.r = 255;
-    vertexData[3].color.g = 100;
-    vertexData[3].color.b = 255;
-    vertexData[3].color.alpha = 255;
+    vertexData[3].SetPosition(x, y);
+    vertexData[3].SetColor(255, 100, 255, 255);
+    vertexData[3].SetUV(0.0f, 0.0f);
 
-    vertexData[4].position.x = x + width;
-    vertexData[4].position.y = y;
-    vertexData[4].color.r = 10;
-    vertexData[4].color.g = 0;
-    vertexData[4].color.b = 255;
-    vertexData[4].color.alpha = 255;
+    vertexData[4].SetPosition(x + width, y);
+    vertexData[4].SetColor(10, 0, 255, 255);
+    vertexData[4].SetUV(1.0f, 0.0f);
 
-    vertexData[5].position.x = x + width;
-    vertexData[5].position.y = y + height;
-    vertexData[5].color.r = 25;
-    vertexData[5].color.g = 50;
-    vertexData[5].color.b = 255;
-    vertexData[5].color.alpha = 255;
+    vertexData[5].SetPosition(x + width, y + height);
+    vertexData[5].SetColor(25, 50, 255, 255);
+    vertexData[5].SetUV(1.0f, 1.0f);
     // telling gl this the active buffer, and type
     glBindBuffer(GL_ARRAY_BUFFER, _vboID);
     // 1: target, size, pointer to array, usage(draw it x times, once etc.)
@@ -92,6 +74,8 @@ void Sprite::Draw() {
                           (void*)offsetof(VertexData, position));
     glVertexAttribPointer(1, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(VertexData),
                           (void*)offsetof(VertexData, color));
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(VertexData),
+		(void*)offsetof(VertexData, uv));
 
     // actually draw. Mode, first element, #of elements(vertices)
     glDrawArrays(GL_TRIANGLES, 0, 6);

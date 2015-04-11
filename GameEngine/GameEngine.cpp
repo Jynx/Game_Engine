@@ -1,4 +1,5 @@
 #include "GameEngine.h"
+#include "ImageLoader.h"
 #include <stdio.h>
 #include <iostream>
 #include <string>
@@ -15,6 +16,9 @@ GameEngine::~GameEngine() {}
 void GameEngine::Run() {
     InitSystems();
     _testSprite.Init(-1.0f, -1.0f, 2.0f, 2.0f);
+    _texture = ImageLoader::LoadImageFromFile(
+        "body_3Dblue.png", 3, 0,
+		SOIL_LOAD_RGBA);
     GameLoop();
 }
 
@@ -52,6 +56,7 @@ void GameEngine::InitShaders() {
                               "Shaders/colorShader.frag");
     _colorProg.AddAttribute("vertexPosition");
     _colorProg.AddAttribute("vertexColor");
+    _colorProg.AddAttribute("vertexUV");
     _colorProg.LinkShaders();
 }
 
@@ -165,17 +170,22 @@ void GameEngine::ProcessInput() {
 }
 
 void GameEngine::DrawGame() {
-
     glClearDepth(1.0);  // sets a var to tell opengl what depth to clear to.
     // clears the color/depth buffer.
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     _colorProg.Bind();
-	GLuint timeUniformLoc = _colorProg.GetUniformVarLocation("time");
-    glUniform1f(timeUniformLoc, _time);
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, _texture.ID);
+    GLint textureLoc = _colorProg.GetUniformVarLocation("tex");
+    glUniform1i(textureLoc, 0);
+    
+ //   GLint timeUniformLoc = _colorProg.GetUniformVarLocation("time");
+   // glUniform1f(timeUniformLoc, _time);
 
     _testSprite.Draw();
 
+    glBindTexture(GL_TEXTURE_2D, 0);
     _colorProg.UnBind();
 
     SDL_GL_SwapWindow(_window);

@@ -4,6 +4,7 @@
 #include "Sprite.h"
 #include "GLSLProgram.h"
 #include "Errors.h"
+#include "OpenGLTexture.h"
 
 class GameEngine {
 public:
@@ -15,7 +16,6 @@ public:
 
     void Run();
     
-
 private:
     void InitSystems();
     void InitShaders();
@@ -33,4 +33,5 @@ private:
     Sprite _testSprite;
 
     GLSLProgram _colorProg;
+	OpenGLTexture _texture;
 };

@@ -3,11 +3,10 @@
 #include <fstream>
 
 bool IOManager::ReadFileToBuf(unsigned char*& buffer,
-                             const std::string& filepath) {
+                             const std::string& filepath, int& bufSize) {
     std::ifstream file(filepath, std::ios::binary);
     if (file.fail()) {
         perror(filepath.c_str());
-       // FatalError("File to Buffer failure");
         return false;
     }
 
@@ -23,6 +22,7 @@ bool IOManager::ReadFileToBuf(unsigned char*& buffer,
     // read
     file.read((char*)buffer, fileSize);
     file.close();
+    bufSize = fileSize;
 
     return true;
 }
