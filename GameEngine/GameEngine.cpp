@@ -3,12 +3,15 @@
 #include <iostream>
 #include <string>
 
+
+
 GameEngine::GameEngine()
     : _screenWidth(1024),
       _screenHeight(768),
       _window(nullptr),
       _gameState(GameState::PLAY),
-      _time(0) {}
+      _time(0),
+      _maxFPS(60.0f) {}
 
 GameEngine::~GameEngine() {}
 
@@ -19,12 +22,12 @@ void GameEngine::Run() {
 
     _sprites.push_back(new Sprite());
     _sprites.back()->Init(0.0f, -1.0f, 1.0f, 1.0f, "body_3Dblue.png");
-    
+
     _sprites.push_back(new Sprite());
     _sprites.back()->Init(-1.0f, 0.0f, 1.0f, 1.0f, "body_3Dblue.png");
     //_texture = ImageLoader::LoadImageFromFile(
-      //  "body_3Dblue.png", 3, 0,
-		//SOIL_LOAD_RGBA);
+    //  "body_3Dblue.png", 3, 0,
+    // SOIL_LOAD_RGBA);
     GameLoop();
 }
 
@@ -68,10 +71,24 @@ void GameEngine::InitShaders() {
 
 void GameEngine::GameLoop() {
     while (_gameState != GameState::EXIT) {
+        float startTicks = SDL_GetTicks();
+        CalculateFPS();
         ProcessInput();
-        _time += 0.0001;
+        _time += 0.01;
         DrawGame();
-    }
+
+        static int frameCounter = 0;
+        frameCounter++;
+        if (frameCounter == 20) {
+            printf(" MS: %f , FPS: %f \n", _ms, _fps);
+            frameCounter = 0;
+        }
+
+        float frameTicks = SDL_GetTicks() - startTicks;
+         if (1000.f / _maxFPS > frameTicks) {
+             SDL_Delay(1000.f / _maxFPS - frameTicks);
+        }
+    } 
 }
 
 void GameEngine::ProcessInput() {
@@ -185,10 +202,10 @@ void GameEngine::DrawGame() {
 
     GLint textureLoc = _colorProg.GetUniformVarLocation("tex");
     glUniform1i(textureLoc, 0);
-    
-	GLint timeUniformLoc = _colorProg.GetUniformVarLocation("time");
+
+    GLint timeUniformLoc = _colorProg.GetUniformVarLocation("time");
     glUniform1f(timeUniformLoc, _time);
-    for(int i = 0; i < _sprites.size(); i++) {
+    for (int i = 0; i < _sprites.size(); i++) {
         _sprites[i]->Draw();
     }
 
@@ -196,4 +213,45 @@ void GameEngine::DrawGame() {
     _colorProg.UnBind();
 
     SDL_GL_SwapWindow(_window);
+}
+
+void GameEngine::CalculateFPS() {
+    static const int FPS_MAX_SAMPLES = 100;
+    static float frameTimes[FPS_MAX_SAMPLES];
+    static int frameIndex = 0;
+    static float previousTicks = SDL_GetTicks();
+
+    float currentTicks = SDL_GetTicks();
+    _frameTime = currentTicks - previousTicks;
+    frameTimes[frameIndex % FPS_MAX_SAMPLES] = _frameTime;
+
+    previousTicks = currentTicks;
+
+    //check to see if we've acqrued enough fames
+    //to average.
+    int frameCount;
+    frameIndex++;
+    if(frameIndex < FPS_MAX_SAMPLES) {
+        frameCount = frameIndex;
+    } else {
+        frameCount = FPS_MAX_SAMPLES;
+    }
+
+    //average all of the samples
+    float avgFrameTime = 0;
+    for (int i = 0; i < frameCount; i++) {
+        avgFrameTime += frameTimes[i];
+    }
+
+    avgFrameTime = avgFrameTime / frameCount;
+
+    //calculate ms/fps
+    if (avgFrameTime > 0) {
+        _fps = 1000.0f / avgFrameTime;
+        _ms = avgFrameTime;
+    } else {
+        _fps = _ms = 60.0f;
+    }
+    
+
 }
