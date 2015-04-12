@@ -1,6 +1,7 @@
 #pragma once
 #include <SDL/SDL.h>
 #include <GL/glew.h>
+#include <vector>
 #include "Sprite.h"
 #include "GLSLProgram.h"
 #include "Errors.h"
@@ -25,13 +26,14 @@ private:
 
     SDL_Window *_window;
     SDL_Joystick *joy;
+
     int _screenWidth;
     int _screenHeight;
-    GameState _gameState;
     float _time;
 
+    std::vector<Sprite*> _sprites;
+    GameState _gameState;
     Sprite _testSprite;
 
     GLSLProgram _colorProg;
-	OpenGLTexture _texture;
 };

@@ -24,6 +24,6 @@ void main() {
    	vec4(fragColor.r * (cos(fragmentPosition.x * 4.0 + time) + 1.0) * 0.5,
         fragColor.g * (cos(fragmentPosition.y * 8.0 + time) + 1.0) * 0.5,
         fragColor.b * (cos(fragmentPosition.x * 2.0 + time) + 1.0) * 0.5,
-        1.0) * texColor;
+        1.0) * texColor * time;
 
 }

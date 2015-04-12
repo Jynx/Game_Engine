@@ -1,5 +1,6 @@
 #include "Sprite.h"
 #include "VertexData.h"
+#include "ResourceManager.h"
 #include <cstddef>
 
 Sprite::Sprite() : _vboID(0) {}
@@ -10,11 +11,13 @@ Sprite::~Sprite() {
     }
 }
 
-void Sprite::Init(float x, float y, float width, float height) {
+void Sprite::Init(float x, float y, float width, float height,
+                  std::string texturePath) {
     _x = x;
     _y = y;
     _width = width;
     _height = height;
+    _texture = ResourceManager::GetTexture(texturePath);
 
     // if zero, hasn't been init. Passes in # of buffers, and
     // a reference to the ID, which is switched to a new ID when gl allocates
@@ -61,6 +64,8 @@ void Sprite::Init(float x, float y, float width, float height) {
 void Sprite::Draw() {
     glBindBuffer(GL_ARRAY_BUFFER, _vboID);  // current active buffer
 
+    glBindTexture(GL_TEXTURE_2D, _texture.ID);
+
     // use our array of positions. We could send more attribute arrays
     // that have information like lighting, color or intensity.
     glEnableVertexAttribArray(0);
@@ -74,8 +79,8 @@ void Sprite::Draw() {
                           (void*)offsetof(VertexData, position));
     glVertexAttribPointer(1, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(VertexData),
                           (void*)offsetof(VertexData, color));
-	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(VertexData),
-		(void*)offsetof(VertexData, uv));
+    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(VertexData),
+                          (void*)offsetof(VertexData, uv));
 
     // actually draw. Mode, first element, #of elements(vertices)
     glDrawArrays(GL_TRIANGLES, 0, 6);

@@ -1,5 +1,4 @@
 #include "GameEngine.h"
-#include "ImageLoader.h"
 #include <stdio.h>
 #include <iostream>
 #include <string>
@@ -15,10 +14,17 @@ GameEngine::~GameEngine() {}
 
 void GameEngine::Run() {
     InitSystems();
-    _testSprite.Init(-1.0f, -1.0f, 2.0f, 2.0f);
-    _texture = ImageLoader::LoadImageFromFile(
-        "body_3Dblue.png", 3, 0,
-		SOIL_LOAD_RGBA);
+    _sprites.push_back(new Sprite());
+    _sprites.back()->Init(-1.0f, -1.0f, 1.0f, 1.0f, "body_3Dblue.png");
+
+    _sprites.push_back(new Sprite());
+    _sprites.back()->Init(0.0f, -1.0f, 1.0f, 1.0f, "body_3Dblue.png");
+    
+    _sprites.push_back(new Sprite());
+    _sprites.back()->Init(-1.0f, 0.0f, 1.0f, 1.0f, "body_3Dblue.png");
+    //_texture = ImageLoader::LoadImageFromFile(
+      //  "body_3Dblue.png", 3, 0,
+		//SOIL_LOAD_RGBA);
     GameLoop();
 }
 
@@ -176,14 +182,15 @@ void GameEngine::DrawGame() {
 
     _colorProg.Bind();
     glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, _texture.ID);
+
     GLint textureLoc = _colorProg.GetUniformVarLocation("tex");
     glUniform1i(textureLoc, 0);
     
- //   GLint timeUniformLoc = _colorProg.GetUniformVarLocation("time");
-   // glUniform1f(timeUniformLoc, _time);
-
-    _testSprite.Draw();
+	GLint timeUniformLoc = _colorProg.GetUniformVarLocation("time");
+    glUniform1f(timeUniformLoc, _time);
+    for(int i = 0; i < _sprites.size(); i++) {
+        _sprites[i]->Draw();
+    }
 
     glBindTexture(GL_TEXTURE_2D, 0);
     _colorProg.UnBind();
