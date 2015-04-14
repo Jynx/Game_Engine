@@ -1,29 +1,35 @@
-========================================================================
-    STATIC LIBRARY : Sengine Project Overview
-========================================================================
+This is a game engine I'm building in C++
 
-AppWizard has created this Sengine library project for you.
+Current Support --
 
-No source files were created as part of your project.
+Modern OpenGL Pipeline
 
+SDL used for Windowing and OpenGL context,
 
-Sengine.vcxproj
-    This is the main project file for VC++ projects generated using an Application Wizard.
-    It contains information about the version of Visual C++ that generated the file, and
-    information about the platforms, configurations, and project features selected with the
-    Application Wizard.
+User input,
 
-Sengine.vcxproj.filters
-    This is the filters file for VC++ projects generated using an Application Wizard. 
-    It contains information about the association between the files in your project 
-    and the filters. This association is used in the IDE to show grouping of files with
-    similar extensions under a specific node (for e.g. ".cpp" files are associated with the
-    "Source Files" filter).
+Shader compilation and support,
 
-/////////////////////////////////////////////////////////////////////////////
-Other notes:
+Texture mapping, and loading,
 
-AppWizard uses "TODO:" comments to indicate parts of the source code you
-should add to or customize.
+File loading,
 
-/////////////////////////////////////////////////////////////////////////////
+A sprite rendering class
+
+FPS and MS counter
+
+Resource Caching
+
+Work in development:
+
+GLM support
+
+2D Camera Support
+
+Collision Detection
+
+Audio system
+
+Particle System
+
+and more!
