@@ -1,0 +1,36 @@
+﻿Build started 4/14/2015 1:24:18 AM.
+     1>Project "W:\resumeTests\GraphicsGames\GraphicsGame1\Sengine\Sengine.vcxproj" on node 2 (Rebuild target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Errors.cpp GLSLProgram.cpp ImageLoader.cpp IOManager.cpp ResourceManager.cpp Sengine.cpp Sprite.cpp TextureCache.cpp Window.cpp
+         Window.cpp
+         TextureCache.cpp
+         Sprite.cpp
+         Sengine.cpp
+         ResourceManager.cpp
+         IOManager.cpp
+     1>w:\resumetests\graphicsgames\graphicsgame1\sengine\iomanager.cpp(18): warning C4244: 'initializing' : conversion from 'std::streamoff' to 'int', possible loss of data
+     1>w:\resumetests\graphicsgames\graphicsgame1\sengine\iomanager.cpp(21): warning C4244: '-=' : conversion from 'std::streamoff' to 'int', possible loss of data
+         ImageLoader.cpp
+         GLSLProgram.cpp
+         Errors.cpp
+         Generating Code...
+       Lib:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\Lib.exe /OUT:"W:\resumeTests\GraphicsGames\GraphicsGame1\Debug\Sengine.lib" SDL2.lib SDL2main.lib opengl32.lib glew32.lib SOIL.lib /NOLOGO Debug\Errors.obj
+         Debug\GLSLProgram.obj
+         Debug\ImageLoader.obj
+         Debug\IOManager.obj
+         Debug\ResourceManager.obj
+         Debug\Sengine.obj
+         Debug\Sprite.obj
+         Debug\TextureCache.obj
+         Debug\Window.obj
+     1>opengl32.lib(OPENGL32.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in SDL2.lib(SDL2.dll); second definition ignored
+     1>opengl32.lib(OPENGL32.dll) : warning LNK4221: This object file does not define any previously undefined public symbols, so it will not be used by any link operation that consumes this library
+     1>glew32.lib(glew32.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in SDL2.lib(SDL2.dll); second definition ignored
+     1>glew32.lib(glew32.dll) : warning LNK4221: This object file does not define any previously undefined public symbols, so it will not be used by any link operation that consumes this library
+         Sengine.vcxproj -> W:\resumeTests\GraphicsGames\GraphicsGame1\Debug\Sengine.lib
+     1>Done Building Project "W:\resumeTests\GraphicsGames\GraphicsGame1\Sengine\Sengine.vcxproj" (Rebuild target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:02.33

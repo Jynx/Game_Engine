@@ -1,11 +1,16 @@
 #pragma once
 #include <SDL/SDL.h>
 #include <GL/glew.h>
+
+#include <Sengine/Sengine.h>
+
+#include <Sengine/Sprite.h>
+#include <Sengine/GLSLProgram.h>
+#include <Sengine/OpenGLTexture.h>
+#include <Sengine/Window.h>
+#include <Sengine/Errors.h>
+
 #include <vector>
-#include "Sprite.h"
-#include "GLSLProgram.h"
-#include "Errors.h"
-#include "OpenGLTexture.h"
 
 class GameEngine {
 public:
@@ -25,7 +30,7 @@ private:
     void DrawGame();
     void CalculateFPS();
 
-    SDL_Window *_window;
+    Sengine::Window _window;
     SDL_Joystick *joy;
 
     int _screenWidth;
@@ -35,13 +40,11 @@ private:
     float _frameTime;
     float _ms;
     float _maxFPS;
-    float _numFrames;
-    float _lastTime;
 
-    std::vector<Sprite*> _sprites;
+	std::vector<Sengine::Sprite*> _sprites;
     
     GameState _gameState;
-    Sprite _testSprite;
+	Sengine::Sprite _testSprite;
 
-    GLSLProgram _colorProg;
+	Sengine::GLSLProgram _colorProg;
 };

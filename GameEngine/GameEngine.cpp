@@ -3,12 +3,10 @@
 #include <iostream>
 #include <string>
 
-
-
 GameEngine::GameEngine()
     : _screenWidth(1024),
       _screenHeight(768),
-      _window(nullptr),
+      _window(),
       _gameState(GameState::PLAY),
       _time(0),
       _maxFPS(60.0f) {}
@@ -17,13 +15,13 @@ GameEngine::~GameEngine() {}
 
 void GameEngine::Run() {
     InitSystems();
-    _sprites.push_back(new Sprite());
+	_sprites.push_back(new Sengine::Sprite());
     _sprites.back()->Init(-1.0f, -1.0f, 1.0f, 1.0f, "body_3Dblue.png");
 
-    _sprites.push_back(new Sprite());
+	_sprites.push_back(new Sengine::Sprite());
     _sprites.back()->Init(0.0f, -1.0f, 1.0f, 1.0f, "body_3Dblue.png");
 
-    _sprites.push_back(new Sprite());
+	_sprites.push_back(new Sengine::Sprite());
     _sprites.back()->Init(-1.0f, 0.0f, 1.0f, 1.0f, "body_3Dblue.png");
     //_texture = ImageLoader::LoadImageFromFile(
     //  "body_3Dblue.png", 3, 0,
@@ -34,29 +32,9 @@ void GameEngine::Run() {
 // last arg  in create window is a uint32_t window flag. like fullscreen,
 // borderless etc.
 void GameEngine::InitSystems() {
-    SDL_Init(SDL_INIT_EVERYTHING |
-             SDL_INIT_JOYSTICK);  // sets up SDL for running everything.
-    _window = SDL_CreateWindow(
-        "GameEngine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-        _screenWidth, _screenHeight, SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE);
-    if (_window == nullptr) {
-        FatalError("SDL Window not created");
-    }
-
-    SDL_GLContext glContext = SDL_GL_CreateContext(_window);
-    if (glContext == nullptr) {
-        FatalError("SDL_GL Context could not be created");
-    }
-
-    GLenum error = glewInit();
-    if (error != GLEW_OK) {
-        FatalError("Glew init error");
-    }
-    // tells SDL we want to double buffer so we can swap too and from.
-    SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
-
-    // rbgalpha every time glClear() is called
-    glClearColor(0.0f, 0.0f, 1.0f, 1.0f);
+    
+	Sengine::Init();
+	_window.Create("GameEngine", _screenWidth, _screenHeight, Sengine::WIN_FULLSCREEN);
     InitShaders();
 }
 
@@ -212,7 +190,7 @@ void GameEngine::DrawGame() {
     glBindTexture(GL_TEXTURE_2D, 0);
     _colorProg.UnBind();
 
-    SDL_GL_SwapWindow(_window);
+	_window.SwapBuffer();
 }
 
 void GameEngine::CalculateFPS() {

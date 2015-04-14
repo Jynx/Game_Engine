@@ -40,8 +40,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(SolutionDir)dependencies/include/;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)dependencies/lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)dependencies/include/;$(SolutionDir);$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)dependencies/lib;$(SolutionDir)Debug/;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -52,7 +52,7 @@
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;opengl32.lib;glew32.lib;SOIL.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;opengl32.lib;glew32.lib;SOIL.lib;Sengine.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -70,27 +70,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Errors.cpp" />
     <ClCompile Include="GameEngine.cpp" />
-    <ClCompile Include="GLSLProgram.cpp" />
-    <ClCompile Include="ImageLoader.cpp" />
-    <ClCompile Include="IOManager.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="ResourceManager.cpp" />
-    <ClCompile Include="Sprite.cpp" />
-    <ClCompile Include="TextureCache.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Errors.h" />
     <ClInclude Include="GameEngine.h" />
-    <ClInclude Include="GLSLProgram.h" />
-    <ClInclude Include="ImageLoader.h" />
-    <ClInclude Include="IOManager.h" />
-    <ClInclude Include="OpenGLTexture.h" />
-    <ClInclude Include="ResourceManager.h" />
-    <ClInclude Include="TextureCache.h" />
-    <ClInclude Include="VertexData.h" />
-    <ClInclude Include="Sprite.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -5,6 +5,8 @@ VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GameEngine", "GameEngine\GameEngine.vcxproj", "{43F669E4-993F-4651-A0D5-F7D9B2D9FE3C}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Sengine", "Sengine\Sengine.vcxproj", "{949938F5-0A51-4A91-88A0-FB61E7B1F5E9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -15,6 +17,10 @@ Global
 		{43F669E4-993F-4651-A0D5-F7D9B2D9FE3C}.Debug|Win32.Build.0 = Debug|Win32
 		{43F669E4-993F-4651-A0D5-F7D9B2D9FE3C}.Release|Win32.ActiveCfg = Release|Win32
 		{43F669E4-993F-4651-A0D5-F7D9B2D9FE3C}.Release|Win32.Build.0 = Release|Win32
+		{949938F5-0A51-4A91-88A0-FB61E7B1F5E9}.Debug|Win32.ActiveCfg = Debug|Win32
+		{949938F5-0A51-4A91-88A0-FB61E7B1F5E9}.Debug|Win32.Build.0 = Debug|Win32
+		{949938F5-0A51-4A91-88A0-FB61E7B1F5E9}.Release|Win32.ActiveCfg = Release|Win32
+		{949938F5-0A51-4A91-88A0-FB61E7B1F5E9}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

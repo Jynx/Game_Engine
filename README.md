@@ -22,13 +22,12 @@ Current Support --
 
 * A sprite rendering class
 
+* FPS and MS counter
+
+* Resource Caching
 
 
 Work in development:
-
-* Texture/Shader caching
-
-* FPS 
 
 * GLM support
 
