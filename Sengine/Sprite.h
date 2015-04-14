@@ -4,18 +4,18 @@
 #include "OpenGLTexture.h"
 
 namespace Sengine {
-	class Sprite {
-	public:
-		Sprite();
-		~Sprite();
+    class Sprite {
+    public:
+        Sprite();
+        ~Sprite();
 
-		void Init(float x, float y, float width, float height,
-			std::string texturePath);
-		void Draw();
+        void Init(float x, float y, float width, float height,
+            std::string texturePath);
+        void Draw();
 
-	private:
-		float _x, _y, _width, _height;
-		GLuint _vboID;  // guaranteed to be 32 bits.
-		OpenGLTexture _texture;
-	};
+    private:
+        float _x, _y, _width, _height;
+        GLuint _vboID;  // guaranteed to be 32 bits.
+        OpenGLTexture _texture;
+    };
 }

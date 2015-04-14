@@ -1,4 +1,4 @@
 
 namespace Sengine {
-	extern int Init();
+    extern int Init();
 }

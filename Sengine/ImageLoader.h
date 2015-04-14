@@ -6,11 +6,11 @@
 
 
 namespace Sengine {
-	class ImageLoader {
-	public:
-		static OpenGLTexture LoadImageFromFile(const std::string& filename,
-			int channelOptions, unsigned int reuseID,
-			unsigned int flags);
-	private:
-	};
+    class ImageLoader {
+    public:
+        static OpenGLTexture LoadImageFromFile(const std::string& filename,
+            int channelOptions, unsigned int reuseID,
+            unsigned int flags);
+    private:
+    };
 }
