@@ -1,4 +1,2 @@
 # Game_Engine
-Game Engine built with C++
-
-Check Sengine for the actual engine.
+Educational/learning efforts around building a game engine from semi-scratch post graduation.
